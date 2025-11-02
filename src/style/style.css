@@ -1,23 +1,22 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('./dark-theme.css');
 
-body {
-  font-family: 'Roboto', Arial, sans-serif;
+html, body {
+  height: 100%;
   margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
   background-color: #f5f5f5;
-  overflow-x: hidden;
-  overflow-y: auto; /* ✅ fixed: allow scrolling so input shows on mobile */
+  overflow: hidden; /* no scrollbars */
 }
 
 .app-container {
   max-width: 750px;
   margin: 0 auto;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 0 10px;
   position: relative;
-  overflow: hidden;
 }
 
 .chat-messages-container {
@@ -27,12 +26,12 @@ body {
   gap: 10px;
   padding: 10px;
   overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: none; /* hide scrollbar (Firefox) */
+  -ms-overflow-style: none; /* hide scrollbar (IE/Edge) */
 }
 
 .chat-messages-container::-webkit-scrollbar {
-  display: none;
+  display: none; /* hide scrollbar (Chrome/Safari) */
 }
 
 .chat-message-user {
@@ -71,10 +70,15 @@ body {
   display: flex;
   padding: 10px;
   background-color: #fff;
-  position: sticky;
+  position: fixed; /* ✅ fixed so it always stays visible */
   bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 750px;
+  margin: 0 auto;
   gap: 10px;
-  z-index: 100; /* ✅ ensures it stays above other elements */
+  z-index: 1000;
+  box-sizing: border-box;
 }
 
 .chat-input {
@@ -83,6 +87,7 @@ body {
   border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 15px;
+  box-sizing: border-box;
 }
 
 .chat-input::placeholder {
